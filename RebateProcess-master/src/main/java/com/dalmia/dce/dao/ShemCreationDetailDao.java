@@ -56,7 +56,7 @@ public class ShemCreationDetailDao {
 		try {
 		 jdbcConnection = dataSource.getConnection();
 		Map<String,SalesOrganizationVO> salesOrgMap = new LinkedHashMap<String,SalesOrganizationVO>();
-		String sql = "select SOrg,Name from sales_organization";
+		String sql = "select VKORG as SOrg from TVKO";
 		
 		 statement = jdbcConnection.createStatement();
 		 resultSet = statement.executeQuery(sql);
@@ -64,10 +64,10 @@ public class ShemCreationDetailDao {
 		while (resultSet.next()) {
 			
 			String sorg = resultSet.getString("SOrg");
-			String name =  resultSet.getString("Name");
+			//String name =  resultSet.getString("Name");
 			SalesOrganizationVO salesOrg = new SalesOrganizationVO();
 			salesOrg.setSorg(sorg);
-			salesOrg.setName(name);
+			//salesOrg.setName(name);
 			salesOrgMap.put(sorg, salesOrg);
 			
 		}
@@ -354,7 +354,7 @@ public class ShemCreationDetailDao {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,SalesGroupVO> salesGroupMap = new LinkedHashMap<String,SalesGroupVO>();
 			//String sql = "select SGrp,Description from sales_group";
-			String sql = "select SGrp,Description from sales_group";
+			String sql = "select VKGRP as SGrp,BEZEI as Description from TVGRT";
 			//connect();
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
@@ -388,7 +388,9 @@ return salesGroupMap;
 		try {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,RegionVO> regionMap = new LinkedHashMap<String,RegionVO>();
-			String sql = "select Rg,Description from region";
+			//String sql = "select Rg,Description from region";
+			String sql = "select BLAND as Rg,BEZEI as Description from T005U WHERE LAND1='IN'";
+			
 			//connect();
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
@@ -422,7 +424,7 @@ return salesGroupMap;
 		try {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,CityCodeVO> cityMap = new LinkedHashMap<String,CityCodeVO>();
-			String sql = "SELECT city_id,Description FROM city_code";
+			String sql = "SELECT cityc as city_id,BEZEI as Description FROM T005h where LAND1='IN'";
 			//connect();
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
@@ -580,7 +582,7 @@ return shippingConditionMap;
 		try {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,MaterialVO> materialMap = new LinkedHashMap<String,MaterialVO>();
-			String sql = "select Material,Material_Description from material";
+			String sql = "select ma.matnr as Material, mt.mat_desc as Material_Description from makt mt, mara ma where ma.matnr=mt.matnr";
 			//connect();
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
@@ -625,8 +627,7 @@ return shippingConditionMap;
 				//costCenterVO.setToDate(resultSet.getString("Material_Description")); 
 				costCenterVO.setName(resultSet.getString("Name")); 
 				costCenterVO.setCoCd(resultSet.getString("CoCd")); 
-				costCenterMap.put(coAR, costCenterVO);
-				
+				costCenterMap.put(coAR, costCenterVO);				
 			}
 
 
@@ -683,7 +684,7 @@ return shippingConditionMap;
 		try {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,ProfitCenterVO> profitCenterMap = new LinkedHashMap<String,ProfitCenterVO>();
-			String sql = "select Profit_Ctr,Name from profit_center";
+			String sql = "select prctr as Profit_Ctr, ktext as Name from cepct";
 			//connect();
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
@@ -748,7 +749,7 @@ return shippingConditionMap;
 		try {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,GLAccountVO> glAcctMap = new LinkedHashMap<String,GLAccountVO>();
-			String sql = "select GL_Acct, Ch_Ac, Long_Text from gl_account_number";
+			String sql = "select s1.saknr as GL_Acct,sk.KTOPL as  Ch_Ac,sk.TXT20 as Long_Text from ska1 s1,skat sk where s1.saknr=sk.saknr";
 			//connect();
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
@@ -815,18 +816,20 @@ return plantMap;
 		try {
 			jdbcConnection = dataSource.getConnection();
 			Map<String,CountryCodeVO> countryCodeMap = new LinkedHashMap<String,CountryCodeVO>();
-			String sql = "SELECT Ctr, Rg, Ccd, Description FROM county_code";
-			//connect();
+			//String sql = "SELECT Ctr, Rg, Ccd, Description FROM county_code";
+			String sql = "SELECT distinct(land1) as Ctr FROM t005u";
+			
 			statement = jdbcConnection.createStatement();
 			resultSet = statement.executeQuery(sql);
+			int i = 1 ;
 			while (resultSet.next()) {
 				CountryCodeVO countryCodeVO = new CountryCodeVO();
 				String plantId = resultSet.getString("Ctr");
 				countryCodeVO.setCtr(resultSet.getString("Ctr"));
-				countryCodeVO.setCcd(resultSet.getString("Ccd"));
-				countryCodeVO.setRg(resultSet.getString("Rg"));
-				countryCodeVO.setDescription(resultSet.getString("Description"));
+				countryCodeVO.setCcd(String.valueOf(i));
+				
 				countryCodeMap.put(plantId, countryCodeVO);
+				i = i++;
 				
 			}
 
@@ -1109,7 +1112,7 @@ return plantMap;
 		return null;
 		}
 
-	public Map<String,SchemeTypeVO> getSchemeType() throws SQLException {
+	public Map<String,SchemeTypeVO> getSchemeType(String scheme_type) throws SQLException {
 		
 		Connection jdbcConnection =null;
 		Statement statement = null;
@@ -1118,16 +1121,17 @@ return plantMap;
 		try {
 		jdbcConnection = dataSource.getConnection();
 		Map<String,SchemeTypeVO> countryCodeMap = new LinkedHashMap<String,SchemeTypeVO>();
-		String sql = "SELECT scheme_type, scheme_name FROM scheme_def";
-		//connect();
+		String sql = "SELECT scheme_type, scheme_name FROM scheme_def where scheme_type='"+scheme_type+"'";
 		statement = jdbcConnection.createStatement();
 		resultSet = statement.executeQuery(sql);
+		int i=1;
 		while (resultSet.next()) {
 			SchemeTypeVO schTypeVO = new SchemeTypeVO();
 			String schType = resultSet.getString("scheme_type");
 			schTypeVO.setSchemeType(resultSet.getString("scheme_type"));
 			schTypeVO.setSchemeName(resultSet.getString("scheme_name"));
-			countryCodeMap.put(schType, schTypeVO);
+			countryCodeMap.put(i+"", schTypeVO);
+			i++;
 			
 		}
 	

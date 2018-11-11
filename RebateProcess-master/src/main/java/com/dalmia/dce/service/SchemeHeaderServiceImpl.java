@@ -16,6 +16,7 @@ import com.dalmia.dce.entities.SchemeHeader;
 import com.dalmia.dce.entities.SchemeHeaderCond;
 import com.dalmia.dce.entities.SchemeHeaderDetail;
 import com.dalmia.dce.repositories.SchemeHeaderRepository;
+import com.dalmia.dce.utilities.NumberIncrementUtil;
 import com.dalmia.dce.utilities.RangeCalculationUtil;
 import com.dalmia.dce.utilities.RangeObject;
 import com.dalmia.dce.vo.SchemeHeaderCondVO;
@@ -68,7 +69,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 		List<SchemeHeaderDetail> lshd = new ArrayList<SchemeHeaderDetail>();
 		List<SchemeHeaderCond> lshc = new ArrayList<SchemeHeaderCond>();
 
-		sh.setSchemNumb(shVO.getSchemNumb());
+		
 		sh.setSalesDocType(shVO.getSalesDocType());
 
 		sh.setActive(shVO.getActive());
@@ -84,7 +85,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 		sh.setFromDate(shVO.getFromDate());
 		sh.setOrderNo(shVO.getOrderNo());
 		sh.setPrevfromDate(shVO.getPrevfromDate());
-		sh.setPrevToDate(shVO.getPrevToDate());
+		sh.setPrevtoDate(shVO.getPrevtoDate());
 		sh.setPriceList(shVO.getPriceList());
 		sh.setApproveStatus("pending");
 		sh.setCreatedBy("user");
@@ -92,8 +93,12 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 		String strDate = dateFormat.format(date);
 		sh.setCreatedOn(strDate);
-		sh.setSchemType(shVO.getSchemType());
-		sh.setSchemCategory(shVO.getSchemCategory());
+		sh.setSchemeType(shVO.getSchemeType());
+		sh.setSchemeCategory(shVO.getSchemeCategory());
+		NumberIncrementUtil num = new NumberIncrementUtil();
+		String seq="RPQD"+num.getNum();
+		sh.setSchemNumb("RPQD"+num.getNum());
+		//sh.setSchemCategory(schemCategory);
 		RangeObject rangeObj = new RangeObject();
 
 		if (shVO.getCompanyCode() != null) {
@@ -108,7 +113,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = compCodeMap.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -126,7 +131,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = salesOrgMap.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -145,7 +150,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = dbChMap.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -163,7 +168,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getDivisionMap.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -181,7 +186,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getSalseOfficeMap.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -199,7 +204,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getSalesGroupMap.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -217,7 +222,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getSalseDistrict.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -235,7 +240,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getRegion.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -253,7 +258,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getCountryCode.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -271,7 +276,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getCityCode.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -289,7 +294,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getCustomer.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -307,7 +312,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getCustomerGroup.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -325,7 +330,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getMaterial.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -343,7 +348,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getMaterialGroup.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -361,7 +366,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getPlant.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -379,7 +384,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getShippingCond.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -397,7 +402,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getPaymentMethod.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -415,7 +420,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getBillingType.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -433,7 +438,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getProfitCenter.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb("RPQD"+num.getNum());
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -451,7 +456,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getCostCenter.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -469,7 +474,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 				String sch_key = getBuisnessArea.get(sch_values);
 				SchemeHeaderDetail obj_detail = new SchemeHeaderDetail();
 				obj_detail.setSchKey(sch_key);
-				obj_detail.setSchemNumb(shVO.getSchemNumb());
+				obj_detail.setSchemNumb(seq);
 				obj_detail.setSchValue(sch_values + "");
 				lshd.add(obj_detail);
 
@@ -487,7 +492,7 @@ public class SchemeHeaderServiceImpl implements SchemeHeaderService {
 		 * for (Integer sch_values : getGlAccount.keySet()) { String sch_key =
 		 * getGlAccount.get(sch_values); SchemeHeaderDetail obj_detail = new
 		 * SchemeHeaderDetail(); obj_detail.setSchKey(sch_key);
-		 * obj_detail.setSchemNumb(shVO.getSchemNumb());
+		 * obj_detail.setSchemNumb(seq);
 		 * obj_detail.setSchValue(sch_values+""); lshd.add(obj_detail);
 		 * 
 		 * }

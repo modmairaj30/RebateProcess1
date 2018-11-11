@@ -9,13 +9,9 @@ public class SchemeHeaderVO {
 
 	private String salesDocType;
 
-	private String schemCategory;
-
-	private String schemType;
-
 	private String OrderNo;
 
-	private String schemNumb;
+	private String schemNumb="QD1";
 
 	private String priceList;
 
@@ -40,9 +36,7 @@ public class SchemeHeaderVO {
 	private String sapNonSapDate;
 
 	private Date prevfromDate;
-
-	private Date prevToDate;
-
+	
 	//private String costCenter;
 
 	private String createdBy;
@@ -51,19 +45,12 @@ public class SchemeHeaderVO {
 	
 	private String approve_status="pending";
 	
-
+	private String schemeType;
+	private String schemeCategory;
+	private Date prevtoDate;
 	
-	private List<SchemeHeaderCondVO> rows;
-	
-	
-	public List<SchemeHeaderCondVO> getRows() {
-		return rows;
-	}
-	public void setRows(List<SchemeHeaderCondVO> rows) {
-		this.rows = rows;
-	}
+	//details
 	private CompanyCodesVO companyCode;
-	
 	private SalesOrganizationVO salesOrg; 
 	private DistributionChannelVO distributionChannel;
 	private DivisionVO division;
@@ -85,6 +72,7 @@ public class SchemeHeaderVO {
 	private CostCenterVO costCenter;
 	private BusinessAreaVO buisnessArea;
 	private GLAccountVO glAccount;
+	private List<SchemeHeaderCondVO> rows;
 	public int getSchemeId() {
 		return schemeId;
 	}
@@ -97,18 +85,7 @@ public class SchemeHeaderVO {
 	public void setSalesDocType(String salesDocType) {
 		this.salesDocType = salesDocType;
 	}
-	public String getSchemCategory() {
-		return schemCategory;
-	}
-	public void setSchemCategory(String schemCategory) {
-		this.schemCategory = schemCategory;
-	}
-	public String getSchemType() {
-		return schemType;
-	}
-	public void setSchemType(String schemType) {
-		this.schemType = schemType;
-	}
+	
 	public String getOrderNo() {
 		return OrderNo;
 	}
@@ -193,12 +170,7 @@ public class SchemeHeaderVO {
 	public void setPrevfromDate(Date prevfromDate) {
 		this.prevfromDate = prevfromDate;
 	}
-	public Date getPrevToDate() {
-		return prevToDate;
-	}
-	public void setPrevToDate(Date prevToDate) {
-		this.prevToDate = prevToDate;
-	}
+	
 	public BusinessAreaVO getBuisnessArea() {
 		return buisnessArea;
 	}
@@ -349,6 +321,32 @@ public class SchemeHeaderVO {
 	public void setApprove_status(String approve_status) {
 		this.approve_status = approve_status;
 	}
+	public String getSchemeType() {
+		return schemeType;
+	}
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
+	}
+	public String getSchemeCategory() {
+		return schemeCategory;
+	}
+	public void setSchemeCategory(String schemeCategory) {
+		this.schemeCategory = schemeCategory;
+	}
+	public Date getPrevtoDate() {
+		return prevtoDate;
+	}
+	public void setPrevtoDate(Date prevtoDate) {
+		this.prevtoDate = prevtoDate;
+	}
+	
+
 	
 	
+	public List<SchemeHeaderCondVO> getRows() {
+		return rows;
+	}
+	public void setRows(List<SchemeHeaderCondVO> rows) {
+		this.rows = rows;
+	}
 }

@@ -28,10 +28,10 @@ public class SchemeHeader {
 	private String salesDocType;
 	
 	@Column(name = "Scheme_Category",length=30)
-	private String schemCategory;
+	private String schemeCategory;
 	
 	@Column(name = "Scheme_Type",length=30)
-	private String schemType;
+	private String schemeType;
 	
 	@Column(name = "Order_No",length=30)
 	private String OrderNo;
@@ -87,7 +87,7 @@ public class SchemeHeader {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Prev_To_Date")
-	private Date prevToDate;
+	private Date prevtoDate;
 	
 	@Column(name = "Cost_Center",length=10)
     private String costCenter;
@@ -140,21 +140,7 @@ public class SchemeHeader {
 		this.salesDocType = salesDocType;
 	}
 
-	public String getSchemCategory() {
-		return schemCategory;
-	}
-
-	public void setSchemCategory(String schemCategory) {
-		this.schemCategory = schemCategory;
-	}
-
-	public String getSchemType() {
-		return schemType;
-	}
-
-	public void setSchemType(String schemType) {
-		this.schemType = schemType;
-	}
+	
 
 	public String getOrderNo() {
 		return OrderNo;
@@ -276,15 +262,7 @@ public class SchemeHeader {
 		this.prevfromDate = prevfromDate;
 	}
 
-	public Date getPrevToDate() {
-		return prevToDate;
-	}
-
-	public void setPrevToDate(Date prevToDate) {
-		this.prevToDate = prevToDate;
-	}
-
-	public String getCostCenter() {
+		public String getCostCenter() {
 		return costCenter;
 	}
 
@@ -331,6 +309,31 @@ public class SchemeHeader {
 	public void setSchemeHeaderDetail(List<SchemeHeaderDetail> schemeHeaderDetail) {
 		this.schemeHeaderDetail = schemeHeaderDetail;
 	}
+
+	public String getSchemeCategory() {
+		return schemeCategory;
+	}
+
+	public void setSchemeCategory(String schemeCategory) {
+		this.schemeCategory = schemeCategory;
+	}
+
+	public String getSchemeType() {
+		return schemeType;
+	}
+
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
+	}
+
+	public Date getPrevtoDate() {
+		return prevtoDate;
+	}
+
+	public void setPrevtoDate(Date prevtoDate) {
+		this.prevtoDate = prevtoDate;
+	}
+	
 
 	/*public List<SchemeHeaderCond> getSchemeHeaderCond() {
 		return schemeHeaderCond;

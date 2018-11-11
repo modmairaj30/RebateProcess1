@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -315,7 +316,7 @@ public class NewSchemeCreationController {
 		Map<String, String> category = new LinkedHashMap<String, String>();
 		category.put("Standard Schemes(Tentative)", "Standard Schemes(Tentative)");
 		category.put("Product Support Schemes", "Product Support Schemes");
-		category.put("Price Support / Difference Schemes", "Price Support / Difference Schemes");
+		category.put("Price Support - Difference Schemes", "Price Support - Difference Schemes");
 		category.put("Commission Schemes", "Commission Schemes");
 		category.put("CRM Schemes", "CRM Schemes");
 
@@ -323,10 +324,10 @@ public class NewSchemeCreationController {
 
 	}
 	
-	@GetMapping(value = "/getSchemeType")
-	public Map<String, SchemeTypeVO> getSchemeType() {
+	@GetMapping(value = "/getSchemeType/{scheme_type}")
+	public Map<String, SchemeTypeVO> getSchemeType(@PathVariable("scheme_type") String scheme_type) {
 		try {
-			return schemcreationDetaiDao.getSchemeType();
+			return schemcreationDetaiDao.getSchemeType(scheme_type);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
